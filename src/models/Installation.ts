@@ -11,5 +11,5 @@ export interface Installation extends RowDataPacket {
 }
 
 export interface GetInstallationsParam {
-  email: string;  
+  email: string;
 }

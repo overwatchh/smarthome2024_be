@@ -1,5 +1,5 @@
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -11,12 +11,13 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
-pool.getConnection()
+pool
+  .getConnection()
   .then(() => {
     console.log("Connected to the database successfully.");
   })
   .catch((err) => {
-    console.error("Error connecting to the database:", err.message);  // Detailed error message
-    console.error("Error stack:", err.stack);                         // Full error stack trace
+    console.error("Error connecting to the database:", err.message); // Detailed error message
+    console.error("Error stack:", err.stack); // Full error stack trace
   });
 export default pool;
