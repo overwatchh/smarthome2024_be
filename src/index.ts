@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import productRoutes from "./routes/productRoutes";
 import installationRoutes from "./routes/installationRoutes";
+import invoiceRoutes from "./routes/invoiceRoutes";
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ app.use(express.json());
 app.use("/api", productRoutes);
 // installation apis
 app.use("/api", installationRoutes);
-
+// invoice apis
+app.use("/api", invoiceRoutes);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

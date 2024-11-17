@@ -5,8 +5,30 @@ export interface InvoiceProduct extends Product {
   quantity: number;
 }
 
-export interface Invoice extends RowDataPacket {
+export interface InvoiceInfo {
   id: number;
   created: string;
   products: InvoiceProduct[];
+}
+
+export interface InvoiceRecord extends RowDataPacket {
+  id: number;
+  created: string;
+}
+
+export interface ProductPayload {
+  id: number;
+  quantity: number;
+}
+export interface CreateInvoicePayload {
+  customer_email: string;
+  products: ProductPayload[]
+}
+
+export interface GetInvoiceByIdParam {
+  id:number;
+}
+
+export interface GetInvoicesByEmailQuery {
+  email:string;
 }
