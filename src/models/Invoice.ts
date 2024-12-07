@@ -21,7 +21,7 @@ export interface ProductPayload {
   quantity: number;
 }
 export interface CreateInvoicePayload {
-  customer_email: string;
+  customer_phone: string;
   products: ProductPayload[]
 }
 
@@ -29,6 +29,6 @@ export interface GetInvoiceByIdParam {
   id:number;
 }
 
-export interface GetInvoicesByEmailQuery {
-  email:string;
+export interface GetInvoicesByPhoneQuery {
+  phone:string;
 }

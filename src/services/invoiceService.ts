@@ -5,17 +5,17 @@ import {
   InvoiceRecord,
   InvoiceProduct,
   InvoiceInfo,
-  GetInvoicesByEmailQuery,
+  GetInvoicesByPhoneQuery,
 } from "../models/Invoice";
 
 export const createInvoiceService = async (
   payload: CreateInvoicePayload
 ): Promise<void> => {
   try {
-    const { customer_email, products } = payload;
+    const { customer_phone, products } = payload;
     const [customerRows] = await pool.query<Customer[]>(
-      "SELECT * FROM customer WHERE email = ?",
-      [customer_email]
+      "SELECT * FROM customer WHERE phone = ?",
+      [customer_phone]
     );
 
     if (customerRows.length === 0) {
@@ -23,8 +23,8 @@ export const createInvoiceService = async (
     }
 
     const [invoiceResult] = await pool.query(
-      "INSERT INTO invoice (created, email) VALUES (NOW(), ?)",
-      [customer_email]
+      "INSERT INTO invoice (created, phone) VALUES (NOW(), ?)",
+      [customer_phone]
     );
 
     const invoiceId = (invoiceResult as any).insertId;
@@ -87,15 +87,15 @@ export const deleteInvoiceByIdService = async (id: number): Promise<void> => {
   }
 };
 
-export const getInvoicesByEmailService = async (
-  query: GetInvoicesByEmailQuery
+export const getInvoicesByPhoneService = async (
+  query: GetInvoicesByPhoneQuery
 ): Promise<InvoiceInfo[]> => {
-  const { email } = query;
+  const { phone } = query;
   try {
-    // Get all invoices for the provided email
+    // Get all invoices for the provided phone
     const [invoices] = await pool.query<InvoiceRecord[]>(
-      "SELECT * FROM invoice WHERE email = ?",
-      [email]
+      "SELECT * FROM invoice WHERE phone = ?",
+      [phone]
     );
 
     if (invoices.length === 0) {

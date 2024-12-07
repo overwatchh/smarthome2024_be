@@ -3,12 +3,12 @@ import {
   createInvoiceService,
   getInvoiceByIdService,
   deleteInvoiceByIdService,
-  getInvoicesByEmailService,
+  getInvoicesByPhoneService,
 } from "../services/invoiceService";
 import {
   CreateInvoicePayload,
   GetInvoiceByIdParam,
-  GetInvoicesByEmailQuery,
+  GetInvoicesByPhoneQuery,
 } from "../models/Invoice";
 export const addInvoice = async (
   req: Request<{}, CreateInvoicePayload>,
@@ -72,12 +72,12 @@ export const deleteInvoiceById = async (
   }
 };
 
-export const getInvoicesByEmail = async (
-  req: Request<{}, {}, {}, GetInvoicesByEmailQuery>,
+export const getInvoicesByPhone = async (
+  req: Request<{}, {}, {}, GetInvoicesByPhoneQuery>,
   res: Response
 ) => {
   try {
-    const invoicesInfo = await getInvoicesByEmailService(req.query);
+    const invoicesInfo = await getInvoicesByPhoneService(req.query);
     res.status(200).json(invoicesInfo);
   } catch (err) {
     if (err instanceof Error) {
